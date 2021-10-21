@@ -1,0 +1,8 @@
+dist
+node_modules
+public
+asset
+assets
+src/asset
+src/assets
+.vscode
