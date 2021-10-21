@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default () => {
-  return (
-    <>Hello world!</>
-  );
+import MainView from './view/MainView'
+
+export default class App extends React.Component {
+  render() {
+    return <MainView />
+  }
 }
