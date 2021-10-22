@@ -1,9 +1,11 @@
 import React from 'react'
 
-import Todo from '../Todo'
 import TodoStatus from '../TodoStatus'
 
 import TodoList from '../component/TodoList'
+import AddTaskForm from '../component/AddTodoForm'
+
+import { genId } from '../idGenerator'
 
 type HomeProps = {}
 type HomeState = {
@@ -12,21 +14,24 @@ type HomeState = {
 
 const initialState: HomeState = {
   todos: [
-    new Todo({
-      id: 0,
-      text: 'wash the desk',
+    {
+      id: genId.next(),
+      name: 'dishes',
+      text: 'wash the dishes',
       status: TodoStatus.ACTIVE
-    }),
-    new Todo({
-      id: 1,
+    },
+    {
+      id: genId.next(),
+      name: 'doggy',
       text: 'walk the dog',
-      status: TodoStatus.ON_HOLD
-    }),
-    new Todo({
-      id: 2,
-      text: 'sleep',
-      status: TodoStatus.ON_HOLD
-    }),
+      status: TodoStatus.ACTIVE
+    },
+    {
+      id: genId.next(),
+      name: 'sleep',
+      text: 'zzzz',
+      status: TodoStatus.COMPLETED
+    },
   ]
 }
 
@@ -35,42 +40,119 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     super(props);
 
     this.state = initialState;
+
+    this.filterTodos = this.filterTodos.bind(this);
+    this.mapTodos = this.mapTodos.bind(this);
+    this.addTodo = this.addTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
+    this.getTodo = this.getTodo.bind(this);
+    this.setTodo = this.setTodo.bind(this);
+    this.editTodo = this.editTodo.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
+    this.completeTodo = this.completeTodo.bind(this);
+    this.completeAllTodos = this.completeAllTodos.bind(this);
+    this.removeCompleted = this.removeCompleted.bind(this);
   }
 
-  addTask(todo: Todo) {
+  filterTodos(predicate: (todo: Todo) => boolean) {
     this.setState(state => {
       return {
-        todos: [...state.todos, todo]
+        todos: state.todos.filter(predicate)
       }
     });
   }
 
-  removeTask(id: number) {
+  mapTodos(mapfun: (todo: Todo, index: number) => Todo) {
     this.setState(state => {
       return {
-        todos: [...state.todos.filter(todo => todo.id !== id)]
+        todos: state.todos.map(mapfun)
       }
     });
   }
 
-  setTask(id: number, todo: Todo) {
+  addTodo(data: AddTodoData) {
+    const newTodo: Todo = {
+      id: genId.next(),
+      status: TodoStatus.ACTIVE,
+      ...data
+    }
+
     this.setState(state => {
-      // state.todos.find(todo => todo.id === id)
-      // const idx = state.todos.findIndex(todo => todo.id === id);
-      
-      // this.
-      
-      // return {
-      //   todos: 
-      // }
-    })
+      return {
+        todos: [...state.todos, newTodo]
+      }
+    });
+  }
+
+  editTodo(id: number, data: EditTodoData) {
+    this.setTodo(id, data);
+  }
+
+  removeTodo(id: number) {
+    this.filterTodos(todo => todo.id !== id);
+  }
+
+  getTodo(id: number) {
+    return this.state.todos.find(todo => todo.id === id);
+  }
+
+  setTodo(id: number, data: TodoData) {
+    this.mapTodos(todo => {
+      if (todo.id === id) {
+        return {...todo, ...data};
+      }
+
+      return todo
+    });
+  }
+
+  toggleTodo(id: number) {
+    this.mapTodos(todo => {
+      if (todo.id === id) {
+        const status = todo.status === TodoStatus.ACTIVE ? TodoStatus.COMPLETED : TodoStatus.ACTIVE;
+
+        return {
+          ...todo,
+          status
+        }
+      }
+
+      return todo;
+    });
+  }
+
+  completeTodo(id: number) {
+    this.setTodo(id, {
+      status: TodoStatus.COMPLETED
+    });
+  }
+
+  completeAllTodos() {
+    this.mapTodos(todo => ({...todo, status: TodoStatus.COMPLETED}));
+  }
+
+  removeCompleted() {
+    this.filterTodos(todo => todo.status !== TodoStatus.COMPLETED);
   }
 
   render() {
     const {todos} = this.state;
 
+    const actions = {
+      remove: this.removeTodo,
+      toggle: this.toggleTodo,
+      edit: this.editTodo,
+    }
+
     return (
-      <TodoList todos={todos} />
+      <>
+        <TodoList todos={todos} actions={actions}  />
+        <AddTaskForm handleAddTodo={this.addTodo}/>
+        <div className="actions">
+          <button type="button" onClick={this.completeAllTodos}>All completed</button>
+          <button type="button" onClick={this.removeCompleted}>Remove Completed</button>
+        </div>
+      </>
     );
   }
 }

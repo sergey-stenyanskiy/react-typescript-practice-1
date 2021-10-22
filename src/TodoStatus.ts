@@ -1,7 +1,6 @@
-const enum TodoStatus {
+enum TodoStatus {
   ACTIVE = "active",
-  COMPLETED = "compoleted",
-  ON_HOLD = "on hold"
+  COMPLETED = "completed",
 }
 
 export default TodoStatus
