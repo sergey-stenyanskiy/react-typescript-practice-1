@@ -13,36 +13,13 @@ export default class TodoListItem extends React.Component<TodoProps> {
   
   constructor(props: TodoProps) {
     super(props);
-
-    this.state = {
-      editName: props.todo.name,
-      editText: props.todo.text,
-    }
-
+    
     this.handleToggle = this.handleToggle.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
 
     this.editName = React.createRef();
     this.editText = React.createRef();
-  }
-
-  handleEditNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState(state => {
-      return {
-        ...state,
-        editName: e.target.value
-      };
-    });
-  }
-
-  handleEditTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState(state => {
-      return {
-        ...state,
-        editText: e.target.value
-      };
-    });
   }
 
   handleToggle(e: React.MouseEvent<HTMLButtonElement>) {
@@ -74,13 +51,17 @@ export default class TodoListItem extends React.Component<TodoProps> {
 
     return (
       <div className="todo-item">
-        <div className="todo-id">{todo.id}</div>
-        <input type="text" className="todo-name" id={`todo-name-${todo.id}`} defaultValue={todo.name} ref={this.editName}/>
-        <input type="text" className="todo-text" id={`todo-text-${todo.id}`} defaultValue={todo.text} ref={this.editText}/>
-        <div className={statusClass}>{todo.status.toUpperCase()}</div>
-        <button type="button" onClick={this.handleEdit}>edit</button>
-        <button type="button" onClick={this.handleToggle}>toggle</button>
-        <button type="button" onClick={this.handleRemove}>remove</button>
+        Task:
+        <div style={{marginBottom: "4px"}} />
+        <div className="todo-item-content">
+          <div className="todo-id">id: {todo.id}</div>
+          <input type="text" className="todo-name" id={`todo-name-${todo.id}`} defaultValue={todo.name} ref={this.editName}/>
+          <input type="text" className="todo-text" id={`todo-text-${todo.id}`} defaultValue={todo.text} ref={this.editText}/>
+          <div className={statusClass}>{todo.status.toUpperCase()}</div>
+          <button type="button" onClick={this.handleEdit}>/ edit</button>
+          <button type="button" onClick={this.handleToggle}>+ toggle</button>
+          <button type="button" onClick={this.handleRemove}>x remove</button>
+        </div>
       </div>
     );
   }
