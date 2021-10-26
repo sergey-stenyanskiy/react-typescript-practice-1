@@ -47,8 +47,6 @@ export default class TodoListItem extends React.PureComponent<TodoProps> {
 
 
   render() {
-    console.log(styles)
-
     const {todo} = this.props;
 
     const statusClass = classnames(styles["todo-status"], `todo-status-${todo.status.split(" ").join("-")}`);

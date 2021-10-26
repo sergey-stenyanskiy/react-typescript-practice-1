@@ -15,26 +15,7 @@ type HomeState = {
 }
 
 const initialState: HomeState = {
-  todos: [
-    {
-      id: genId.next(),
-      name: 'dishes',
-      text: 'do the dishes',
-      status: TodoStatus.ACTIVE
-    },
-    {
-      id: genId.next(),
-      name: 'doggy',
-      text: 'walk the dog',
-      status: TodoStatus.ACTIVE
-    },
-    {
-      id: genId.next(),
-      name: 'sleep',
-      text: 'zzzz',
-      status: TodoStatus.COMPLETED
-    },
-  ]
+  todos: []
 }
 
 export default class Home extends React.PureComponent<HomeProps, HomeState> {
