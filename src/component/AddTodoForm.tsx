@@ -14,7 +14,7 @@ const initialState: AddTodoFormState = {
   todoText: 'add description',
 }
 
-export default class AddTodoForm extends React.Component<AddTodoFormProps, AddTodoFormState> {
+export default class AddTodoForm extends React.PureComponent<AddTodoFormProps, AddTodoFormState> {
   private form: React.RefObject<HTMLFormElement>
     
   constructor(props: AddTodoFormProps) {

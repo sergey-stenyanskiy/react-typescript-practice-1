@@ -2,14 +2,12 @@ import React from 'react'
 
 import TodoListItem from './TodoListItem'
 
-import {v4 as uuid} from 'uuid'
-
 type TodoListProps = {
   todos: Todo[],
   actions: TodoActions
 }
 
-export default class TodoList extends React.Component<TodoListProps> {
+export default class TodoList extends React.PureComponent<TodoListProps> {
   constructor(props: TodoListProps) {
     super(props);
   }
@@ -17,7 +15,7 @@ export default class TodoList extends React.Component<TodoListProps> {
   render() {
     const {todos, actions} = this.props;
 
-    const content = todos.length > 0 ? todos.map(todo => <TodoListItem key={uuid()} todo={todo} actions={actions} />) : "No tasks" 
+    const content = todos.length > 0 ? todos.map((todo, i) => <TodoListItem key={i} todo={todo} actions={actions} />) : "No tasks" 
 
     return (
       <div className="todo-list">

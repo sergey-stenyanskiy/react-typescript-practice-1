@@ -7,7 +7,7 @@ type TodoProps = {
   actions: TodoActions
 }
 
-export default class TodoListItem extends React.Component<TodoProps> {
+export default class TodoListItem extends React.PureComponent<TodoProps> {
   editName: React.RefObject<HTMLInputElement>
   editText: React.RefObject<HTMLInputElement>
   

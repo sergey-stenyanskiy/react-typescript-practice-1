@@ -5,7 +5,7 @@ import TodoStatus from '../TodoStatus'
 import TodoList from '../component/TodoList'
 import AddTaskForm from '../component/AddTodoForm'
 
-import { genId } from '../idGenerator'
+import { genId } from '../util/idGenerator'
 
 type HomeProps = {}
 type HomeState = {
@@ -35,7 +35,7 @@ const initialState: HomeState = {
   ]
 }
 
-export default class Home extends React.Component<HomeProps, HomeState> {
+export default class Home extends React.PureComponent<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
 
