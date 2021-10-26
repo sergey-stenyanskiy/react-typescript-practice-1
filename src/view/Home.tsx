@@ -7,6 +7,8 @@ import AddTaskForm from '../component/AddTodoForm'
 
 import { genId } from '../util/idGenerator'
 
+import styles from '../css/Home.module.scss'
+
 type HomeProps = {}
 type HomeState = {
   todos: Todo[]
@@ -145,7 +147,7 @@ export default class Home extends React.PureComponent<HomeProps, HomeState> {
     }
 
     return (
-      <main className="home">
+      <main className={styles.main}>
         <TodoList todos={todos} actions={actions}  />
         <AddTaskForm handleAddTodo={this.addTodo}/>
         <div className="actions">

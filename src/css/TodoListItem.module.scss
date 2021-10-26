@@ -1,0 +1,35 @@
+
+.todo-item {
+  margin-bottom: 12px;
+}
+
+.todo-item:last-child {
+  margin-bottom: 0;
+}
+
+.todo-item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.todo-item-content > * {
+  margin-right: 12px;
+}
+
+.todo-item-content > *:last-child {
+  margin-right: 0;
+}
+
+.todo-name {
+  width: 100px;
+}
+
+.todo-description {
+  width: 150px;
+}
+
+.todo-status {
+  width: 96px;
+  overflow-x: hidden;
+}

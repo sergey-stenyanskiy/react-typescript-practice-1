@@ -1,5 +1,9 @@
 import React from 'react'
 
+import styles from '../css/AddTodoForm.module.scss'
+
+// import '../css/'
+
 type AddTodoFormProps = {
   handleAddTodo: (taskData: AddTodoData) => void
 }
@@ -67,7 +71,7 @@ export default class AddTodoForm extends React.PureComponent<AddTodoFormProps, A
     const {todoName, todoText} = this.state;
 
     return (
-      <form name="add-todo-from" className="add-todo-form" ref={this.form} onSubmit={this.handleSubmit}>
+      <form name="add-todo-from" className={styles["add-todo-form"]} ref={this.form} onSubmit={this.handleSubmit}>
         <label htmlFor="add-todo-name">
           Task name:
         </label>

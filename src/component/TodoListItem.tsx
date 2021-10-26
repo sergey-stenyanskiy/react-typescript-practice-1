@@ -2,6 +2,8 @@ import React from 'react'
 
 import classnames from 'classnames'
 
+import styles from '../css/TodoListItem.module.scss'
+
 type TodoProps = {
   todo: Todo,
   actions: TodoActions
@@ -45,18 +47,20 @@ export default class TodoListItem extends React.PureComponent<TodoProps> {
 
 
   render() {
+    console.log(styles)
+
     const {todo} = this.props;
 
-    const statusClass = classnames("todo-status", `todo-status-${todo.status.split(" ").join("-")}`);
+    const statusClass = classnames(styles["todo-status"], `todo-status-${todo.status.split(" ").join("-")}`);
 
     return (
-      <div className="todo-item">
+      <div className={styles["todo-item"]}>
         Task:
         <div style={{marginBottom: "4px"}} />
-        <div className="todo-item-content">
+        <div className={styles["todo-item-content"]}>
           <div className="todo-id">id: {todo.id}</div>
-          <input type="text" className="todo-name" id={`todo-name-${todo.id}`} defaultValue={todo.name} ref={this.editName}/>
-          <input type="text" className="todo-text" id={`todo-text-${todo.id}`} defaultValue={todo.text} ref={this.editText}/>
+          <input type="text" className={styles["todo-name"]} id={`todo-name-${todo.id}`} defaultValue={todo.name} ref={this.editName}/>
+          <input type="text" className={styles["todo-text"]} id={`todo-text-${todo.id}`} defaultValue={todo.text} ref={this.editText}/>
           <div className={statusClass}>{todo.status.toUpperCase()}</div>
           <button type="button" onClick={this.handleEdit}>/ edit</button>
           <button type="button" onClick={this.handleToggle}>+ toggle</button>
