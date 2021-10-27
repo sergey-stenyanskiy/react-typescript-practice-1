@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Home from './Home'
+import Home from './Home/Home'
 
 export default class MainView extends React.PureComponent {
   render() {

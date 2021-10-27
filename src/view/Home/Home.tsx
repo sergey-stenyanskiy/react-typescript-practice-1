@@ -1,13 +1,17 @@
 import React from 'react'
 
-import TodoStatus from '../TodoStatus'
+import TodoStatus from '../../TodoStatus'
 
-import TodoList from '../component/TodoList'
-import AddTaskForm from '../component/AddTodoForm'
+import Button from '../../component/Button'
+import TodoList from '../../component/TodoList/TodoList'
+import AddTaskForm from '../../component/AddTodoForm/AddTodoForm'
 
-import { genId } from '../util/idGenerator'
+import { genId } from '../../util/idGenerator'
 
-import styles from '../css/Home.module.scss'
+import styles from './Home.module.scss'
+
+import {Todo, TodoData, EditTodoData, AddTodoData} from "../../types/types"
+
 
 type HomeProps = {}
 type HomeState = {
@@ -132,8 +136,8 @@ export default class Home extends React.PureComponent<HomeProps, HomeState> {
         <TodoList todos={todos} actions={actions}  />
         <AddTaskForm handleAddTodo={this.addTodo}/>
         <div className="actions">
-          <button type="button" onClick={this.completeAllTodos}>All completed</button>
-          <button type="button" onClick={this.removeCompleted}>Remove Completed</button>
+          <Button onClick={this.completeAllTodos}>All completed</Button>
+          <Button onClick={this.removeCompleted}>Remove Completed</Button>
         </div>
       </main>
     );

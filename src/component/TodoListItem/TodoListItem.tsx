@@ -2,7 +2,11 @@ import React from 'react'
 
 import classnames from 'classnames'
 
-import styles from '../css/TodoListItem.module.scss'
+import {Todo, TodoActions} from "../../types/types"
+
+import styles from './TodoListItem.module.scss'
+
+import Button from '../Button'
 
 type TodoProps = {
   todo: Todo,
@@ -60,9 +64,9 @@ export default class TodoListItem extends React.PureComponent<TodoProps> {
           <input type="text" className={styles["todo-name"]} id={`todo-name-${todo.id}`} defaultValue={todo.name} ref={this.editName}/>
           <input type="text" className={styles["todo-text"]} id={`todo-text-${todo.id}`} defaultValue={todo.text} ref={this.editText}/>
           <div className={statusClass}>{todo.status.toUpperCase()}</div>
-          <button type="button" onClick={this.handleEdit}>/ edit</button>
-          <button type="button" onClick={this.handleToggle}>+ toggle</button>
-          <button type="button" onClick={this.handleRemove}>x remove</button>
+          <Button onClick={this.handleEdit}>/ edit</Button>
+          <Button onClick={this.handleToggle}>+ toggle</Button>
+          <Button onClick={this.handleRemove}>x remove</Button>
         </div>
       </div>
     );

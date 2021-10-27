@@ -1,8 +1,11 @@
 import React from 'react'
 
-import TodoListItem from './TodoListItem'
+import TodoListItem from '../TodoListItem/TodoListItem'
 
-import styles from '../css/TodoList.module.scss'
+import {Todo, TodoActions} from "../../types/types"
+
+
+import styles from './TodoList.module.scss'
 
 type TodoListProps = {
   todos: Todo[],
@@ -17,7 +20,7 @@ export default class TodoList extends React.PureComponent<TodoListProps> {
   render() {
     const {todos, actions} = this.props;
 
-    const content = todos.length > 0 ? todos.map((todo, i) => <TodoListItem key={i} todo={todo} actions={actions} />) : "No tasks" 
+    const content = todos.length > 0 ? todos.map((todo) => <TodoListItem key={todo.id} todo={todo} actions={actions} />) : "No tasks" 
 
     return (
       <div className={styles["todo-list"]}>

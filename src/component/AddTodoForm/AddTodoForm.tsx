@@ -1,8 +1,10 @@
 import React from 'react'
 
-import styles from '../css/AddTodoForm.module.scss'
+import styles from './AddTodoForm.module.scss'
 
-// import '../css/'
+import {AddTodoData} from "../../types/types"
+
+import TextInput from '../TextInput'
 
 type AddTodoFormProps = {
   handleAddTodo: (taskData: AddTodoData) => void
@@ -72,14 +74,8 @@ export default class AddTodoForm extends React.PureComponent<AddTodoFormProps, A
 
     return (
       <form name="add-todo-from" className={styles["add-todo-form"]} ref={this.form} onSubmit={this.handleSubmit}>
-        <label htmlFor="add-todo-name">
-          Task name:
-        </label>
-        <input type="text" id="add-todo-todo-name" value={todoName} onChange={this.handleTodoNameChange} required/>
-        <label htmlFor="add-todo-text">
-          Task description:
-        </label>
-        <input type="text" id="add-todo-todo-text" value={todoText} onChange={this.handleTodoTextChange} />
+        <TextInput label="Task name:" onChange={this.handleTodoNameChange} value={todoName} id="add-todo-todo-name" required/>
+        <TextInput label="Task description:" onChange={this.handleTodoTextChange} value={todoText} id="add-todo-todo-text"/>
         <button type="submit" >Add new Task</button>
       </form>
     );
